@@ -5,24 +5,19 @@ const axios = require("axios");
 const config = require("./config/config");
 const crypto = require("crypto");
 const cors = require("cors");
+const path = require("path");
 
 app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '/frontend/dist')));
-
-app.get('*', (req,res) =>{
-  res.sendFile(path.join(__dirname+'/frontend/dist/index.html'));
-});
-
 app.post("/big", (req, res) => {
   res.redirect("https://bokboon.herokuapp.com/");
 });
 
 app.get("/getTest", (req, res) => {
-  res.send(5555555555);
+  res.json({ responseData: "bigphanuwit" });
 });
 
 app.post("/api/senddonation", (req, res) => {
@@ -84,6 +79,11 @@ app.post("/api/senddonation", (req, res) => {
     .catch((err) => res.status(0000).json(err));
 });
 
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/frontend/dist/index.html"));
+});
 app.listen(4020, () => {
   console.log("Start server at port 4020.");
 });
