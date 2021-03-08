@@ -12,7 +12,7 @@ app.post("/big", (req, res) => {
   res.redirect("http://localhost:8080/");
 });
 
-app.post("/getTest", (req, res) => {
+app.get("/getTest", (req, res) => {
   res.send(5555555555);
 });
 
